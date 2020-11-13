@@ -1,21 +1,18 @@
 
-async function getLocation(){
-  const response = await fetch("https://api.opencagedata.com/geocode/v1/json?q=97459&key=96284b3b928a4567aed3c32ec2e0ab41")
-  const location = await response.json();
-  return location;
-}
+let zipcode = 97420;
 
-function setLocation(lat){
-  let latitude = lat;
+fetch(`https://api.opencagedata.com/geocode/v1/json?q=${zipcode}&key=96284b3b928a4567aed3c32ec2e0ab41`)
+.then(response=>{
+  return response.json();
+}).then(data=>{
 
-  console.log(latitude);
-}
+  let latatitude = data.results[0].geometry.lat;
+  let longaitude = data.results[0].geometry.lng;
 
-getLocation()
-.then(res=>{
-  let userInfo = res.results;
-  userInfo.map(user => {
-    let userLat = user.geometry.lat
-    setLocation(userLat);
-  })
+  return fetch(`https://weather-proxy.freecodecamp.rocks/api/current?lat=${latatitude}&lon=${longaitude}`)
+
+}).then(response =>{
+  return response.json();
+}).then(data=>{
+  console.log(data);
 })
