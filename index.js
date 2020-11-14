@@ -1,13 +1,15 @@
 
-let zipcode = "Coos Bay OR";
+
 let locations; 
 
 function getUserInput(){
-	
- return; 
+	locations = document.getElementById("zipcode").value;
+	console.log(locations)
+	return locations;
 }
 
 async function getLocation(userlocation){
+
     let userInput = getUserInput();
 	let response = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${userInput}&key=96284b3b928a4567aed3c32ec2e0ab41`);
 	let data =  await response.json();
@@ -26,15 +28,19 @@ async function setLocation(data){
   return jsonresponse;
 }
 
-getLocation(zipcode)
 
-.then(data=>{
- 
- setLocation(data)
+document.getElementById("search").addEventListener("click",()=>{
+   		getLocation(zipcode)
 
-   .then(data=>{
-   		
-	})
-})
+			.then(data=>{
+			 
+			 setLocation(data)
+
+			   .then(data=>{
+			   		console.log(data)
+				})
+			})
+
+   });
 
 
