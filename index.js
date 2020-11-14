@@ -8,6 +8,11 @@ function getUserInput(){
 	return locations;
 }
 
+function generateHtml(condition){
+	document.getElementById("Conditions").innerHTML = condition;
+}
+
+
 async function getLocation(userlocation){
 
     let userInput = getUserInput();
@@ -28,8 +33,9 @@ async function setLocation(data){
   return jsonresponse;
 }
 
+function displayWeather(){
 
-document.getElementById("search").addEventListener("click",()=>{
+	document.getElementById("search").addEventListener("click",()=>{
    		getLocation(zipcode)
 
 			.then(data=>{
@@ -38,9 +44,15 @@ document.getElementById("search").addEventListener("click",()=>{
 
 			   .then(data=>{
 			   		console.log(data)
+			   		generateHtml(data.name);
 				})
 			})
 
    });
+
+
+}
+
+displayWeather();
 
 
