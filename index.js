@@ -39,13 +39,7 @@ async function setLocation(data){
 }
 
 
-function resetWeatherSearch(){
-	document.getElementById("Clear").addEventListener("click",()=>{
-		ClearHtml();
-		ButtonSubmitDisable();
-	})
-	
-}
+
 
 function ReturnWeatherinfo(){
 	   		getLocation(locations)
@@ -74,5 +68,5 @@ function displayWeather(){
 }
 
 displayWeather();
-resetWeatherSearch();
+
 
