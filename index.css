@@ -1,0 +1,23 @@
+body{
+	margin:0;
+	background-color: #efefef;
+	}
+
+.col{
+	text-align: center;
+    padding-bottom: 10%;
+    padding-top: 10%;
+}
+
+button{
+	margin-top: 2em;
+}
+.row{
+	box-shadow: 5px 10px 8px #888888;
+	background-color: #dedddd;
+	border-radius: 5%;
+}
+
+.container{
+	 margin-top: 10%;
+}
