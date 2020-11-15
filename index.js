@@ -1,17 +1,22 @@
 
-
 let locations; 
 
 function getUserInput(){
-	locations = document.getElementById("zipcode").value;
+	locations = document.getElementById("input").value;
 	console.log(locations)
 	return locations;
 }
 
-function generateHtml(condition){
+function generateHtml(condition,icon,location){
+
+	document.getElementById("location").innerHTML = "The weather in " + location + " " + "is:";
 	document.getElementById("Conditions").innerHTML = condition;
+	document.getElementById("icon").src = icon;
 }
 
+function ClearHtml(){
+	document.getElementById("input")
+}
 
 async function getLocation(userlocation){
 
@@ -33,10 +38,17 @@ async function setLocation(data){
   return jsonresponse;
 }
 
-function displayWeather(){
 
-	document.getElementById("search").addEventListener("click",()=>{
-   		getLocation(zipcode)
+function resetWeatherSearch(){
+	document.getElementById("Clear").addEventListener("click",()=>{
+		ClearHtml();
+		ButtonSubmitDisable();
+	})
+	
+}
+
+function ReturnWeatherinfo(){
+	   		getLocation(locations)
 
 			.then(data=>{
 			 
@@ -44,15 +56,23 @@ function displayWeather(){
 
 			   .then(data=>{
 			   		console.log(data)
-			   		generateHtml(data.name);
+			   		generateHtml(data.weather[0].description,data.weather[0].icon,data.name);
+
 				})
+			   .catch(error => console.log('Oops something went wrong', error))
+
 			})
+}
 
+function displayWeather(){
+
+	document.getElementById("search").addEventListener("click",(event)=>{
+		ReturnWeatherinfo();
+		 document.getElementById("input").value = "" ;
    });
-
-
+   
 }
 
 displayWeather();
-
+resetWeatherSearch();
 
